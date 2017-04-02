@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "562027614433",
+    "firebase_url": "https://protravel-d1a3f.firebaseio.com",
+    "project_id": "protravel-d1a3f",
+    "storage_bucket": "protravel-d1a3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562027614433:android:ebf3662333fe0122",
+        "android_client_info": {
+          "package_name": "mx.itesm.projectprotravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562027614433-4amoqoj9np3b0ub4jtb08onho1vtbbvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "itesm.mx.projectprotravel",
+            "certificate_hash": "925c97fc8c19b3ced8768576942ff69505d1d613"
+          }
+        },
+        {
+          "client_id": "562027614433-bvgklme9tudvrcnpuqm1rnkp5b6639jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2X-hPK9hJ2c1mm9GYLFwNGgv8KrORZy0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562027614433-bvgklme9tudvrcnpuqm1rnkp5b6639jq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,7 +21,7 @@ public class EditUser extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference myRef;
     private Integer request;
-    private String id;
+    private String codigoViaje;
     EditText name;
 
     @Override
@@ -30,14 +30,14 @@ public class EditUser extends AppCompatActivity {
         setContentView(R.layout.activity_edit_user);
 
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
         request = intent.getIntExtra("activity", 0);
+        codigoViaje = intent.getStringExtra("codigoViaje");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference("");
         name = (EditText)findViewById(R.id.editText11);
 
-        final String code = id;
+        final String code = user.getUid().toString();
         myRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -57,29 +57,38 @@ public class EditUser extends AppCompatActivity {
     }
 
     public void saveUpdate(View view){
-        final String code = id;
-        if(request == 0){
-            myRef.addListenerForSingleValueEvent(
-                    new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.child("Users").child(code).exists()){ //checks the code is correct
-                                myRef.child("Users").child(code).child("name").setValue(name.getText().toString());
-                            }else{
-                                Toast.makeText(EditUser.this,"Couldn't update data",Toast.LENGTH_SHORT).show();
-                            }
+        final String code = user.getUid().toString();
+        myRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("Users").child(code).exists()){ //checks the code is correct
+                            myRef.child("Users").child(code).child("name").setValue(name.getText().toString());
+                        }else{
+                            Toast.makeText(EditUser.this,"Couldn't update data",Toast.LENGTH_SHORT).show();
                         }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                    }
+                });
+        if(request == 0){
             Intent intent = new Intent(this, SelectionActivity.class);
-            intent.putExtra("id", id);
             startActivity(intent);
         }
         else if(request == 1){
-
+            Intent intent = new Intent(this, ViajeActivity.class);
+            startActivity(intent);
+        }
+        else if(request == 2){
+            Intent intent = new Intent(this, LeaderControlActivity.class);
+            intent.putExtra("codigo", codigoViaje);
+            startActivity(intent);
+        }
+        else if(request == 3){
+            Intent intent = new Intent(this, CodigoActivity.class);
+            startActivity(intent);
         }
     }
 }

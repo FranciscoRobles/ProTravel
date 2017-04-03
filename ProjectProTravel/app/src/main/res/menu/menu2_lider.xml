@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_account"
             android:title="Editar Perfil"
             android:icon="@mipmap/ic_person_black_24dp">
+        </item>
+
+        <item android:id="@+id/nav_viaje"
+            android:title="Editar Viaje"
+            android:icon="@mipmap/ic_directions_bus_black_24dp">
         </item>
 
         <item android:id="@+id/nav_logout"

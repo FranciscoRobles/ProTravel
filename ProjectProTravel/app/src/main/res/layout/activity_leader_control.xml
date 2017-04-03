@@ -93,4 +93,22 @@
         app:srcCompat="@mipmap/ic_launcher"
         android:layout_below="@+id/textView10"
         android:layout_alignStart="@+id/textView10" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/drawerLayoutLider2">
+
+        <android.support.design.widget.NavigationView
+            android:layout_width="wrap_content"
+            app:menu = "@menu/menu2_lider"
+            android:layout_gravity="start"
+            android:layout_height="150dp"
+            android:id="@+id/nav_view_lider2">
+        </android.support.design.widget.NavigationView>
+
+    </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

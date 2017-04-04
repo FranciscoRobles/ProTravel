@@ -38,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
         email=(EditText)findViewById(R.id.editText);
         password=(EditText)findViewById(R.id.editText2);
 
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user!=null){
+            Intent intent=new Intent(this,SelectionActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void createU(View v){
@@ -82,5 +92,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,SelectionActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
+        finish();
     }
 }

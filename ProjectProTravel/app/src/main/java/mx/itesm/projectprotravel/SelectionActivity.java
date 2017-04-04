@@ -11,11 +11,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SelectionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout layout;
     private ActionBarDrawerToggle toggle;
     private NavigationView nv;
+    private FirebaseAuth mAuth;
     //Número para saber a cuál actividad regresar
     private static final int ACTIVITY_SELECTION = 0;
 
@@ -23,6 +26,8 @@ public class SelectionActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+
+        mAuth = FirebaseAuth.getInstance();
 
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayout);
@@ -60,6 +65,11 @@ public class SelectionActivity extends AppCompatActivity implements NavigationVi
             intent.putExtra("activity", ACTIVITY_SELECTION);
             startActivity(intent);
 
+        }else if(item.getItemId() == R.id.nav_logout){
+            mAuth.signOut();
+            Intent intent=new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
         layout.closeDrawer(GravityCompat.START);
         return true;

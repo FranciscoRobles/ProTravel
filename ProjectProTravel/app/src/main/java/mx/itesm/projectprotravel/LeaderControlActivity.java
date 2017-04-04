@@ -85,6 +85,12 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
             intent.putExtra("activity", ACTIVITY_SELECTION);
             intent.putExtra("codigoViaje", codigo);
             startActivity(intent);
+        }else if(item.getItemId() == R.id.nav_logout){
+            mAuth.signOut();
+            Intent intent=new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //removes all the previous activities
+            startActivity(intent);
+            finish();
         }
         layout.closeDrawer(GravityCompat.START);
         return true;

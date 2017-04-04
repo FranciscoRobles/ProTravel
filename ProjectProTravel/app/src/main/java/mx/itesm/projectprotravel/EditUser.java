@@ -90,5 +90,9 @@ public class EditUser extends AppCompatActivity {
             Intent intent = new Intent(this, CodigoActivity.class);
             startActivity(intent);
         }
+        else if(request == 4){
+            Intent intent = new Intent(this, Enter_Code.class);
+            startActivity(intent);
+        }
     }
 }

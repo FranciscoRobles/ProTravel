@@ -8,26 +8,43 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-public class LeaderControlActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import java.util.ArrayList;
+
+public class LeaderControlActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        AdapterView.OnItemClickListener{
 
     private DrawerLayout layout;
     private ActionBarDrawerToggle toggle;
     private NavigationView nv;
+
     //Número para saber a cuál actividad regresar
     private static final int ACTIVITY_SELECTION = 2;
 
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
     private FirebaseUser user;
+
+    //Attributes of listview
+    private ArrayList<User> viajeros;
+    private UserAdapter adapter;
+    private ListView list;
 
     TextView codigoViaje;
     String codigo;
@@ -46,7 +63,15 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
         codigoViaje=(TextView)findViewById(R.id.textView7);
 
         codigo=intent.getStringExtra("codigo");
-        codigoViaje.setText(codigo);
+        codigoViaje.setText("Código de viaje: "+codigo);
+
+        //ListView
+        viajeros=new ArrayList<User>();
+        adapter=new UserAdapter(viajeros,this);
+        list=(ListView)findViewById(R.id.ListViewViajeros);
+        list.setAdapter(adapter);
+
+
 
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayoutLider2);
@@ -56,6 +81,35 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         nv = (NavigationView)findViewById(R.id.nav_view_lider2);
         nv.setNavigationItemSelectedListener(this);
+
+
+
+
+        //Base de datos en tiempo real
+        Query query=myRef.child("Users").orderByChild("viaje").equalTo(codigo);
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                viajeros=new ArrayList<User>();
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+
+                    User u=new User(postSnapshot.child("name").getValue().toString(),postSnapshot.child("email").getValue().toString());
+                    viajeros.add(u);
+
+                }
+                adapter=new UserAdapter(viajeros,LeaderControlActivity.this);
+                list.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 
@@ -67,7 +121,12 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
     public void signalButton(View v){
         Intent intent = new Intent(this, SignActivity.class);
         startActivity(intent);
+
     }
+
+
+
+
 
     //Necessary for the navigationbar to work correctly
     @Override
@@ -94,5 +153,10 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
         }
         layout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

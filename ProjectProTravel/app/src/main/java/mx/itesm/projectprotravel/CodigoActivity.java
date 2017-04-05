@@ -33,14 +33,12 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
-    private FirebaseUser user;
 
+    String codigo;
     TextView nombre;
     TextView destino;
     TextView partida;
     TextView tiempo;
-
-    EditText code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +47,14 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
         mAuth=FirebaseAuth.getInstance();
         myRef= FirebaseDatabase.getInstance().getReference("");
-        user=mAuth.getCurrentUser();
-
-        code=(EditText)findViewById(R.id.editText7);
 
         nombre=(TextView)findViewById(R.id.textView3);
         destino=(TextView)findViewById(R.id.textView4);
         partida=(TextView)findViewById(R.id.textView5);
         tiempo=(TextView)findViewById(R.id.textView6);
+
+        Intent intent = getIntent();
+        codigo = intent.getStringExtra("codigo");
 
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayoutViajero);
@@ -67,12 +65,7 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
         nv = (NavigationView)findViewById(R.id.nav_view_viajero);
         nv.setNavigationItemSelectedListener(this);
 
-    }
-
-    public void codeButton(View v){
-
-        final String sCode=code.getText().toString();
-
+        final String sCode= codigo;
         //Validación de datos
         myRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -80,27 +73,11 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         if(dataSnapshot.child("Viajes").child(sCode).exists()){ //checks the code is correct
-                            if(!(dataSnapshot.child("Users").child(user.getUid()).child("viaje"). //Checks the user is not already registered
-                                    getValue().toString()).equals(sCode)){
-
-                                //modifies the interface and the database
-                                Toast.makeText(CodigoActivity.this,"Codigo Valido",Toast.LENGTH_SHORT).show();
-                                nombre.setText(nombre.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("nombre").getValue());
-                                destino.setText(destino.getText().toString()+ " "+dataSnapshot.child("Viajes").child(sCode).child("destino").getValue());
-                                partida.setText(destino.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("partida").getValue());
-                                tiempo.setText(tiempo.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("tiempo").getValue());
-
-                                //Agregando el viaje al usuario
-                                myRef.child("Users").child(user.getUid()).child("viaje").setValue(sCode);
-
-                                myRef.child("Viajes").child(sCode).child("viajeros").setValue(
-                                        Integer.parseInt(dataSnapshot.child("Viajes").child(sCode).child("viajeros").getValue().toString())+1);
-
-                            }
-
-
-                        }else{
-                            Toast.makeText(CodigoActivity.this,"Codigo Invalido",Toast.LENGTH_SHORT).show();
+                            //modifies the interface and the database
+                            nombre.setText(nombre.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("nombre").getValue());
+                            destino.setText(destino.getText().toString()+ " "+dataSnapshot.child("Viajes").child(sCode).child("destino").getValue());
+                            partida.setText(destino.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("partida").getValue());
+                            tiempo.setText(tiempo.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("tiempo").getValue());
                         }
                     }
 
@@ -109,6 +86,12 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
                     }
                 });
+
+    }
+
+    public void codeButton(View v){
+
+
 
     }
 
@@ -126,6 +109,7 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
         if(item.getItemId() == R.id.nav_account){
             Intent intent=new Intent(this,EditUser.class);
             intent.putExtra("activity", ACTIVITY_SELECTION);
+            intent.putExtra("codigoViaje", codigo);
             startActivity(intent);
 
         }else if(item.getItemId() == R.id.nav_logout){

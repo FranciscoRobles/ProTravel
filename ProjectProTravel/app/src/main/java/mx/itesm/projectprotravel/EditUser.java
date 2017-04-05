@@ -92,6 +92,7 @@ public class EditUser extends AppCompatActivity {
         }
         else if(request == 4){
             Intent intent = new Intent(this, Enter_Code.class);
+            intent.putExtra("codigo", codigoViaje);
             startActivity(intent);
         }
     }

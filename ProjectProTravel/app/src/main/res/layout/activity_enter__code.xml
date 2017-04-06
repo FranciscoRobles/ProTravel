@@ -11,27 +11,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="mx.itesm.projectprotravel.Enter_Code">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:text="Ingrese código de viaje"
-        android:textSize="20dp"
-        android:id="@+id/editTextCodigo"
-        android:layout_marginTop="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:text="Entrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCodigo"
         android:onClick="codeButton"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/editTextCodigo"
+        android:layout_marginTop="103dp"
+        android:layout_below="@+id/editTCodigo"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Codigo"
+        android:ems="10"
+        android:id="@+id/editTCodigo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp" />
 
     <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
@@ -50,5 +49,6 @@
         </android.support.design.widget.NavigationView>
 
     </android.support.v4.widget.DrawerLayout>
+
 
 </RelativeLayout>

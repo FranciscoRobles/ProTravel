@@ -44,7 +44,7 @@ public class Enter_Code extends AppCompatActivity implements NavigationView.OnNa
         myRef= FirebaseDatabase.getInstance().getReference("");
         user=mAuth.getCurrentUser();
 
-        code=(EditText)findViewById(R.id.editTextCodigo);
+        code=(EditText)findViewById(R.id.editTCodigo);
 
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayoutViajero3);

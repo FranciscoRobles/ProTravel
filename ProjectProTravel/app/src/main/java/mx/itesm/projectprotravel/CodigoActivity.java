@@ -96,97 +96,24 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
     }
 
     public void statusFine(View v){
-        final String sCode = codigo;
-
-        myRef.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        if(!(dataSnapshot.child("Users").child(user.getUid()).child("viaje"). //Checks the user is not already registered
-                                getValue().toString()).equals(sCode)){
-                            myRef.child("Users").child(user.getUid()).child("estatus").setValue("ready");
-                            Toast.makeText(CodigoActivity.this, "I'm ready", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+        myRef.child("Users").child(user.getUid()).child("status").setValue("ready");
+        Toast.makeText(CodigoActivity.this, "I'm ready to go", Toast.LENGTH_SHORT).show();
 
     }
 
     public void statusBuy(View v){
-        final String sCode = codigo;
-
-        myRef.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        if(!(dataSnapshot.child("Users").child(user.getUid()).child("viaje"). //Checks the user is not already registered
-                                getValue().toString()).equals(sCode)){
-                            myRef.child("Users").child(user.getUid()).child("estatus").setValue("buy");
-                            Toast.makeText(CodigoActivity.this, "I'm buying", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+        myRef.child("Users").child(user.getUid()).child("status").setValue("buy");
+        Toast.makeText(CodigoActivity.this, "I'm buying", Toast.LENGTH_SHORT).show();
     }
 
     public void statusBath(View v){
-        final String sCode = codigo;
-
-        myRef.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        if(!(dataSnapshot.child("Users").child(user.getUid()).child("viaje"). //Checks the user is not already registered
-                                getValue().toString()).equals(sCode)){
-                            myRef.child("Users").child(user.getUid()).child("estatus").setValue("bath");
-                            Toast.makeText(CodigoActivity.this, "I'm in the bathroom", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+        myRef.child("Users").child(user.getUid()).child("status").setValue("bath");
+        Toast.makeText(CodigoActivity.this, "I'm in the bathroom", Toast.LENGTH_SHORT).show();
     }
 
     public void statusLeave(View v){
-        final String sCode = codigo;
-
-        myRef.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        if(!(dataSnapshot.child("Users").child(user.getUid()).child("viaje"). //Checks the user is not already registered
-                                getValue().toString()).equals(sCode)){
-                            Intent intent = new Intent(CodigoActivity.this, SelectionActivity.class);
-                            myRef.child("Users").child(user.getUid()).child("estatus").setValue("");
-                            myRef.child("Users").child(user.getUid()).child("viaje").setValue(0);
-                            startActivity(intent);
-                            Toast.makeText(CodigoActivity.this, "Thanks for the trip", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+        myRef.child("Users").child(user.getUid()).child("status").setValue("Leave");
+        Toast.makeText(CodigoActivity.this, "I'm leaving", Toast.LENGTH_SHORT).show();
     }
 
     //Necessary for the navigationbar to work correctly

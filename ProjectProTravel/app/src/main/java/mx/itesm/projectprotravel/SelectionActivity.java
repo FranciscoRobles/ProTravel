@@ -12,6 +12,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import static android.R.id.list;
 
 public class SelectionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -19,6 +30,8 @@ public class SelectionActivity extends AppCompatActivity implements NavigationVi
     private ActionBarDrawerToggle toggle;
     private NavigationView nv;
     private FirebaseAuth mAuth;
+    private DatabaseReference myRef;
+    private FirebaseUser user;
     //Número para saber a cuál actividad regresar
     private static final int ACTIVITY_SELECTION = 0;
 
@@ -28,7 +41,8 @@ public class SelectionActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_selection);
 
         mAuth = FirebaseAuth.getInstance();
-
+        myRef=FirebaseDatabase.getInstance().getReference("");
+        user=mAuth.getCurrentUser();
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -40,13 +54,53 @@ public class SelectionActivity extends AppCompatActivity implements NavigationVi
     }
 
     public void liderButton(View v){
-        Intent intent=new Intent(this,ViajeActivity.class);
-        startActivity(intent);
+
+        myRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.child("Users").child(user.getUid()).child("leader").exists()){
+                            Intent intent=new Intent(SelectionActivity.this,LeaderControlActivity.class);
+                            intent.putExtra("codigo",dataSnapshot.child("Users").child(user.getUid()).child("leader").getValue().toString());
+                            startActivity(intent);
+                        }else{
+                            Intent intent=new Intent(SelectionActivity.this,ViajeActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 
     public void viajeroButton(View v){
-        Intent intent=new Intent(this,Enter_Code.class);
-        startActivity(intent);
+
+        myRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if(Integer.parseInt(dataSnapshot.child("Users").child(user.getUid()).child("viaje").getValue().toString())!=0){
+                            Intent intent=new Intent(SelectionActivity.this,CodigoActivity.class);
+                            intent.putExtra("codigo",dataSnapshot.child("Users").child(user.getUid()).child("viaje").getValue().toString());
+                            startActivity(intent);
+                        }else{
+                            Intent intent=new Intent(SelectionActivity.this,Enter_Code.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 
     //Necessary for the navigationbar to work correctly

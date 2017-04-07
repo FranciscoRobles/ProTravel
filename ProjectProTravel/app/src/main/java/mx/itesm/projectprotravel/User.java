@@ -8,14 +8,14 @@ public class User {
 
     String name;
     String email;
-    String estatus;
     int viaje;
+    String status;
 
     public User(String name,String email){
 
         this.name=name;
         this.email=email;
-        this.estatus = "";
+        this.status = "";
         viaje=0;
     }
 
@@ -27,10 +27,12 @@ public class User {
         return email;
     }
 
-    public String getEstatus() { return estatus; }
+    public String getStatus() { return status; }
 
     public int getViaje(){
         return viaje;
     }
+
+    public void setStatus(String status){ this.status=status; }
 
 }

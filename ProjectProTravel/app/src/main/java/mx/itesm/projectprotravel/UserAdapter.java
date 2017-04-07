@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,10 +47,27 @@ public class UserAdapter extends BaseAdapter {
 
         //
         TextView nameText=(TextView)view.findViewById(R.id.textViewNombre);
-
+        TextView statusText=(TextView)view.findViewById(R.id.textViewID);
+        ImageView img= (ImageView) view.findViewById(R.id.imageViewEstado);
+        //img.setImageResource(R.drawable.);
 
         User user=dataSource.get(position);
         nameText.setText(user.getName());
+
+        if(user.getStatus().equals("")){
+            statusText.setText("Unknown");
+        }else{
+            statusText.setText(user.getStatus());
+        }
+
+        /*if(user.getStatus().equals("buy")){
+            img.setImageResource(R.drawable.buy);
+        }else if(user.getStatus().equals("bath")){
+            img.setImageResource(R.drawable.);
+        }*/
+
+
+
 
 
         return view;

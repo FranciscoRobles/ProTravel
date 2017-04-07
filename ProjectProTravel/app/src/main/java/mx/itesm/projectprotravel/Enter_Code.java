@@ -79,7 +79,7 @@ public class Enter_Code extends AppCompatActivity implements NavigationView.OnNa
                                 */
 
                                 //Agregando el viaje al usuario
-                                myRef.child("Users").child(user.getUid()).child("viaje").setValue(sCode);
+                                myRef.child("Users").child(user.getUid()).child("viaje").setValue(Integer.parseInt(sCode));
 
                                 //Sumando 1 al total de viajes
                                 myRef.child("Viajes").child(sCode).child("viajeros").setValue(
@@ -88,6 +88,7 @@ public class Enter_Code extends AppCompatActivity implements NavigationView.OnNa
                                 Intent intent = new Intent(Enter_Code.this, CodigoActivity.class);
                                 intent.putExtra("codigo", code.getText().toString());
                                 startActivity(intent);
+                                finish();
                             }
 
 

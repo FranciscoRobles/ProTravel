@@ -62,8 +62,11 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
 
         codigoViaje=(TextView)findViewById(R.id.textView7);
 
+
+
         codigo=intent.getStringExtra("codigo");
         codigoViaje.setText("Código de viaje: "+codigo);
+
 
         //ListView
         viajeros=new ArrayList<User>();
@@ -86,7 +89,7 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
 
 
         //Base de datos en tiempo real
-        Query query=myRef.child("Users").orderByChild("viaje").equalTo(codigo);
+        Query query=myRef.child("Users").orderByChild("viaje").equalTo(Integer.parseInt(codigo));
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,6 +99,12 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
                     // TODO: handle the post
 
                     User u=new User(postSnapshot.child("name").getValue().toString(),postSnapshot.child("email").getValue().toString());
+                    String status=postSnapshot.child("status").getValue().toString();
+
+                    if(status!=null){ //safety measure
+                        u.setStatus(postSnapshot.child("status").getValue().toString());
+                    }
+
                     viajeros.add(u);
 
                 }
@@ -114,13 +123,53 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
     }
 
     public void deleteButton(View v){
+        Query query=myRef.child("Users").orderByChild("viaje").equalTo(Integer.parseInt(codigo));
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+
+                    String key = postSnapshot.getKey();
+                    myRef.child("Users").child(key).child("viaje").setValue(0);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         myRef.child("Viajes").child(codigo).removeValue();
+        myRef.child("Users").child(user.getUid()).child("leader").removeValue();
         finish();
     }
 
     public void signalButton(View v){
-        Intent intent = new Intent(this, SignActivity.class);
-        startActivity(intent);
+        Query query=myRef.child("Users").orderByChild("viaje").equalTo(Integer.parseInt(codigo));
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+
+                    String key = postSnapshot.getKey();
+                    myRef.child("Users").child(key).child("status").setValue("");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

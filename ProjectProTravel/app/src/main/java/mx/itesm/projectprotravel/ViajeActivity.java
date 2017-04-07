@@ -71,11 +71,13 @@ public class ViajeActivity extends AppCompatActivity implements NavigationView.O
         int codigo=generarCodigo();
         Viaje viaje=new Viaje(nombre.getText().toString(),destino.getText().toString(),partida.getText().toString(),
                                 tiempo.getText().toString(),user.getUid());
-        myRef.child("Viajes").child(Integer.toString(codigo)).setValue(viaje); //le metes un objeto y obtiene datos de los getters
+        myRef.child("Viajes").child(Integer.toString(codigo)).setValue(viaje);//le metes un objeto y obtiene datos de los getters
+        myRef.child("Users").child(user.getUid()).child("leader").setValue(codigo);
 
         Intent intent=new Intent(this,LeaderControlActivity.class);
         intent.putExtra("codigo",Integer.toString(codigo));
         startActivity(intent);
+        finish();
     }
 
     private int generarCodigo(){//genera un código y lo revisa en la base de datos

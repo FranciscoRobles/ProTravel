@@ -60,14 +60,14 @@ public class UserAdapter extends BaseAdapter {
             statusText.setText(user.getStatus());
         }
 
-        /*if(user.getStatus().equals("buy")){
-            img.setImageResource(R.drawable.buy);
+        if(user.getStatus().equals("buy")){
+            img.setImageResource(R.mipmap.ic_shopping_cart_black_24dp);
         }else if(user.getStatus().equals("bath")){
-            img.setImageResource(R.drawable.);
-        }*/
-
-
-
+            img.setImageResource(R.mipmap.ic_bathroom24x24);
+        }
+        else if(user.getStatus().equals("ready")){
+            img.setImageResource(R.mipmap.ic_mood_black_24dp);
+        }
 
 
         return view;

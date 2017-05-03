@@ -62,6 +62,8 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
         code.setText("Código de viaje: " + codigo);
 
+        startService(new Intent(getBaseContext(), ServiceEndTrip.class));
+
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayoutViajero);
         toggle = new ActionBarDrawerToggle(this, layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -114,6 +116,14 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
     public void statusLeave(View v){
         myRef.child("Users").child(user.getUid()).child("status").setValue("Leave");
         Toast.makeText(CodigoActivity.this, "I'm leaving", Toast.LENGTH_SHORT).show();
+    }
+
+    public void endTrip(View v){
+        myRef.child("Users").child(user.getUid()).child("status").setValue(" ");
+        myRef.child("Users").child(user.getUid()).child("viaje").setValue(0);
+        Intent intent = new Intent(this, SelectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //removes all the previous activities
+        startActivity(intent);
     }
 
     //Necessary for the navigationbar to work correctly

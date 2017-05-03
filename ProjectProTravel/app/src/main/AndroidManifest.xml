@@ -24,7 +24,9 @@
         <activity android:name=".CreateUser" />
         <activity android:name=".SignActivity" />
         <activity android:name=".EditUser" />
-        <activity android:name=".Enter_Code"></activity>
+        <activity android:name=".Enter_Code" />
+        <activity android:name=".EditViaje"></activity>
+        <service android:name=".ServiceEndTrip"></service>
     </application>
 
 </manifest>

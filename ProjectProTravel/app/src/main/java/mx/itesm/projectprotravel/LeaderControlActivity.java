@@ -200,6 +200,11 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
             startActivity(intent);
             finish();
         }
+        else if(item.getItemId() == R.id.nav_viaje){
+            Intent intent = new Intent(this, EditViaje.class);
+            intent.putExtra("codigoViaje", codigo);
+            startActivity(intent);
+        }
         layout.closeDrawer(GravityCompat.START);
         return true;
     }

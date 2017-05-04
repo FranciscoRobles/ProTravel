@@ -146,6 +146,9 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
 
         myRef.child("Viajes").child(codigo).removeValue();
         myRef.child("Users").child(user.getUid()).child("leader").removeValue();
+        Intent intent=new Intent(this, SelectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //removes all the previous activities
+        startActivity(intent);
         finish();
     }
 

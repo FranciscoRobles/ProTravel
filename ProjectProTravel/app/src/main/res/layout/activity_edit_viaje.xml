@@ -69,5 +69,6 @@
         android:layout_below="@+id/viajeTiempo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
-        android:id="@+id/saveTrip" />
+        android:id="@+id/saveTrip"
+        android:onClick="saveChangesViaje"/>
 </RelativeLayout>

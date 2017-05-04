@@ -43,7 +43,7 @@ public class EditViaje extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.child("Viajes").child(code).exists()){ //checks the code is correct
-                            name.setText(dataSnapshot.child("Viajes").child(code).child("name").getValue().toString());
+                            name.setText(dataSnapshot.child("Viajes").child(code).child("nombre").getValue().toString());
                             destino.setText(dataSnapshot.child("Viajes").child(code).child("destino").getValue().toString());
                             partida.setText(dataSnapshot.child("Viajes").child(code).child("partida").getValue().toString());
                             tiempo.setText(dataSnapshot.child("Viajes").child(code).child("tiempo").getValue().toString());
@@ -61,13 +61,13 @@ public class EditViaje extends AppCompatActivity {
 
     }
 
-    public void saveChanges(View view){
+    public void saveChangesViaje(View view){
         myRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.child("Viajes").child(code).exists()){ //checks the code is correct
-                            myRef.child("Viajes").child(code).child("name").setValue(name.getText().toString());
+                            myRef.child("Viajes").child(code).child("nombre").setValue(name.getText().toString());
                             myRef.child("Viajes").child(code).child("destino").setValue(destino.getText().toString());
                             myRef.child("Viajes").child(code).child("partida").setValue(partida.getText().toString());
                             myRef.child("Viajes").child(code).child("tiempo").setValue(tiempo.getText().toString());
@@ -82,5 +82,6 @@ public class EditViaje extends AppCompatActivity {
                 });
         Intent intent = new Intent(this, LeaderControlActivity.class);
         intent.putExtra("codigo", code);
+        startActivity(intent);
     }
 }

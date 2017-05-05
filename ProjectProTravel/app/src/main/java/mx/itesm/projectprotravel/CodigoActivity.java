@@ -65,8 +65,6 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
         code.setText("Código de viaje: " + codigo);
 
-        //startService(new Intent(getBaseContext(), ServiceEndTrip.class));
-
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayoutViajero);
         toggle = new ActionBarDrawerToggle(this, layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -100,7 +98,7 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
                         if(dataSnapshot.child("Users").child(user.getUid()).child("status").getValue().equals("notify")){
                             NotificationCompat.Builder mBuilder=
                                     new NotificationCompat.Builder(CodigoActivity.this)
-                                            .setSmallIcon(R.drawable.buy)
+                                            .setSmallIcon(R.mipmap.ic_error_outline_black_24dp)
                                             .setContentTitle("Hurry")
                                             .setContentText("We are leaving, time to go. Notify your leader");
 
@@ -142,7 +140,7 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
     }
 
     public void statusLeave(View v){
-        myRef.child("Users").child(user.getUid()).child("status").setValue("Leave");
+        myRef.child("Users").child(user.getUid()).child("status").setValue("leave");
         Toast.makeText(CodigoActivity.this, "I'm leaving", Toast.LENGTH_SHORT).show();
     }
 

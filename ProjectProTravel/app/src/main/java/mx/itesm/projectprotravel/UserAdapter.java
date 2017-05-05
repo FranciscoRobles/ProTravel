@@ -56,6 +56,7 @@ public class UserAdapter extends BaseAdapter {
 
         if(user.getStatus().equals("")||user.getStatus().equals("notify")){
             statusText.setText("Unknown");
+            img.setImageResource(R.mipmap.ic_radio_button_unchecked_black_24dp);
         }else{
             statusText.setText(user.getStatus());
         }
@@ -68,6 +69,9 @@ public class UserAdapter extends BaseAdapter {
         }
         else if(user.getStatus().equals("ready")){
             img.setImageResource(R.mipmap.ic_mood_black_24dp);
+        }
+        else if(user.getStatus().equals("leave")){
+            img.setImageResource(R.mipmap.ic_directions_run_black_24dp);
         }
 
 

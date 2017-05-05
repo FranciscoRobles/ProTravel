@@ -44,6 +44,10 @@
 
     <Button
         android:text="Crear"
+        android:background="@color/colorAccent"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText9"

@@ -13,6 +13,7 @@
 
     <TextView
         android:text="Código de viaje"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -22,6 +23,7 @@
 
     <TextView
         android:text="Nombre: "
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -31,6 +33,7 @@
 
     <TextView
         android:text="Destino:"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -40,6 +43,7 @@
 
     <TextView
         android:text="Partida:"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -49,6 +53,7 @@
 
     <TextView
         android:text="Tiempo de viaje:"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -60,14 +65,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ready!"
+        android:textSize="20dp"
         android:layout_marginTop="56dp"
         android:layout_below="@+id/textView6"
         android:layout_toEndOf="@+id/textView2"
         android:id="@+id/buttonReady"
+        android:background="@color/colorAccent"
+        android:textColor="#FFFFFF"
         android:onClick="statusFine"/>
 
     <Button
         android:text="Bathroom"
+        android:textSize="15dp"
+        android:background="@color/colorAccentBath"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/buttonReady"
@@ -77,6 +88,9 @@
 
     <Button
         android:text="Buy"
+        android:textSize="20dp"
+        android:background="@color/colorAccentBuy"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonBuy"
@@ -87,6 +101,9 @@
 
     <Button
         android:text="Leave"
+        android:textSize="20dp"
+        android:background="@color/colorAccentLeave"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/buttonBuy"
@@ -96,6 +113,9 @@
 
     <Button
         android:text="End trip!"
+        android:textSize="17dp"
+        android:background="@color/colorAccent2"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

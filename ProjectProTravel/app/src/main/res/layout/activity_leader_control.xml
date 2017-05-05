@@ -13,6 +13,7 @@
 
     <TextView
         android:text="TextView"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView7"
@@ -21,6 +22,10 @@
 
     <Button
         android:text="Reanudar Viaje"
+        android:textColor="#FFFFFF"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ListViewViajeros"
@@ -32,6 +37,10 @@
 
     <Button
         android:text="Finalizar"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        android:background="@color/colorAccent2"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/button11"

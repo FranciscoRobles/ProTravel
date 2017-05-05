@@ -54,11 +54,12 @@ public class UserAdapter extends BaseAdapter {
         User user=dataSource.get(position);
         nameText.setText(user.getName());
 
-        if(user.getStatus().equals("")){
+        if(user.getStatus().equals("")||user.getStatus().equals("notify")){
             statusText.setText("Unknown");
         }else{
             statusText.setText(user.getStatus());
         }
+
 
         if(user.getStatus().equals("buy")){
             img.setImageResource(R.mipmap.ic_shopping_cart_black_24dp);

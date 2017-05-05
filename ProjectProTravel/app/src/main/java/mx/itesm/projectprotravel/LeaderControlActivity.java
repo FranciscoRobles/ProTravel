@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -73,6 +74,7 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
         adapter=new UserAdapter(viajeros,this);
         list=(ListView)findViewById(R.id.ListViewViajeros);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(this);
 
 
 
@@ -163,6 +165,7 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
                     // TODO: handle the post
 
                     String key = postSnapshot.getKey();
+                    myRef.child("Users").child(key).child("status").setValue("notify");
                     myRef.child("Users").child(key).child("status").setValue("");
                 }
 
@@ -214,6 +217,30 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Query query=myRef.child("Users").orderByChild("email").equalTo(viajeros.get(position).getEmail());
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+
+                    String key = postSnapshot.getKey();
+                    myRef.child("Users").child(key).child("status").setValue("notify");
+                    myRef.child("Users").child(key).child("status").setValue("");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        
 
     }
 }

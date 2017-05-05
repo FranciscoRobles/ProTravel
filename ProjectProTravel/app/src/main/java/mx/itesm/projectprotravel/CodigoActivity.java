@@ -1,13 +1,16 @@
 package mx.itesm.projectprotravel;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -62,7 +65,7 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
         code.setText("Código de viaje: " + codigo);
 
-        startService(new Intent(getBaseContext(), ServiceEndTrip.class));
+        //startService(new Intent(getBaseContext(), ServiceEndTrip.class));
 
         //Navigationbar
         layout = (DrawerLayout)findViewById(R.id.drawerLayoutViajero);
@@ -75,18 +78,43 @@ public class CodigoActivity extends AppCompatActivity implements NavigationView.
 
         final String sCode= codigo;
         //Validación de datos
-        myRef.addListenerForSingleValueEvent(
+        myRef.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(dataSnapshot.child("Viajes").child(sCode).exists()){ //checks the code is correct
-                            //modifies the interface and the database
-                            nombre.setText(nombre.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("nombre").getValue());
-                            destino.setText(destino.getText().toString()+ " "+dataSnapshot.child("Viajes").child(sCode).child("destino").getValue());
-                            partida.setText(destino.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("partida").getValue());
-                            tiempo.setText(tiempo.getText().toString()+" "+dataSnapshot.child("Viajes").child(sCode).child("tiempo").getValue());
+
+                        //modifies the interface and the database
+                        nombre.setText("Nombre:"+" "+dataSnapshot.child("Viajes").child(sCode).child("nombre").getValue());
+                        destino.setText("Destino:"+ " "+dataSnapshot.child("Viajes").child(sCode).child("destino").getValue());
+                        partida.setText("Partida:"+" "+dataSnapshot.child("Viajes").child(sCode).child("partida").getValue());
+                        tiempo.setText("Tiempo de viaje:"+" "+dataSnapshot.child("Viajes").child(sCode).child("tiempo").getValue());
+
+                        //Toast.makeText(CodigoActivity.this,dataSnapshot.child("Users").child(user.getUid()).child("viaje").getValue().toString(),Toast.LENGTH_SHORT).show();
+
+                        if (Integer.parseInt(dataSnapshot.child("Users").child(user.getUid()).child("viaje").getValue().toString())==0) {
+                            Toast.makeText(CodigoActivity.this,"Adios",Toast.LENGTH_SHORT).show();
+                            finish();
                         }
+
+                        if(dataSnapshot.child("Users").child(user.getUid()).child("status").getValue().equals("notify")){
+                            NotificationCompat.Builder mBuilder=
+                                    new NotificationCompat.Builder(CodigoActivity.this)
+                                            .setSmallIcon(R.drawable.buy)
+                                            .setContentTitle("Hurry")
+                                            .setContentText("We are leaving, time to go. Notify your leader");
+
+                            // Sets an ID for the notification
+                            int mNotificationId = 001;
+                            // Gets an instance of the NotificationManager service
+                            NotificationManager mNotifyMgr =
+                                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            // Builds the notification and issues it.
+                            mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+                            //podemos agregar un Toast
+                        }
+
                     }
 
                     @Override

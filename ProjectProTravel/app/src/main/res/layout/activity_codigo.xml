@@ -109,7 +109,8 @@
         android:layout_alignTop="@+id/buttonBuy"
         android:layout_alignStart="@+id/buttonBath"
         android:id="@+id/buttonLeave"
-        android:onClick="statusLeave"/>
+        android:onClick="statusLeave"
+        android:layout_alignBottom="@+id/buttonBuy" />
 
     <Button
         android:text="End trip!"

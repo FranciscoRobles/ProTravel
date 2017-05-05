@@ -21,21 +21,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Reanudar Viaje"
-        android:textColor="#FFFFFF"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ListViewViajeros"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="36dp"
-        android:id="@+id/button11"
-        android:onClick="signalButton" />
-
-    <Button
         android:text="Finalizar"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
@@ -71,5 +56,19 @@
         android:layout_height="320dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Reanudar Viaje"
+        android:textColor="#FFFFFF"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button11"
+        android:onClick="signalButton"
+        android:layout_below="@+id/ListViewViajeros"
+        android:layout_toStartOf="@+id/button12"
+        android:layout_marginEnd="18dp" />
 
 </RelativeLayout>

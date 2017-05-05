@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#1ABC9C</color>
     <color name="colorPrimaryDark">#1ABC9C</color>
-    <color name="colorAccent">#1ABC9C</color>
-    <color name="colorAccent2">#FF0000</color>
-    <color name="colorAccentLeave">#00CC00</color>
-    <color name="colorAccentBath">#331900</color>
-    <color name="colorAccentBuy">#000099</color>
-    <color name="colorAccentEtc">#000000</color>
+    <color name="colorAccent">#F1C40F</color>
+    <color name="colorAccent2">#F39C12</color>
+    <color name="colorAccentLeave">#F1C40F</color>
+    <color name="colorAccentBath">#F1C40F</color>
+    <color name="colorAccentBuy">#F1C40F</color>
+    <color name="colorAccentEtc">#F1C40F</color>
 </resources>

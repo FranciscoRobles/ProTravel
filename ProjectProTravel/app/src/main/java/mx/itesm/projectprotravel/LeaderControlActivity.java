@@ -240,7 +240,7 @@ public class LeaderControlActivity extends AppCompatActivity implements Navigati
             }
         });
 
-        
+
 
     }
 }
